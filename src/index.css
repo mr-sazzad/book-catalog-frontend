@@ -1,0 +1,326 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.navbar {
+  height: 70px;
+  border-bottom: 1px solid lightgray;
+  padding-left: 50px;
+  padding-right: 50px;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo-link .book-logo {
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+.logo-link h2 {
+  font-size: 24px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* menu side */
+
+.menu-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-links li {
+  margin-left: 30px;
+}
+
+.menu-links li,
+.mobile-menu-links li {
+  font-size: 16px;
+  font-weight: 500;
+  color: #112d4e;
+}
+
+.menu-links .f-link {
+  margin-left: 0;
+}
+
+.menu-links li a div {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu-links {
+  margin-top: 70px;
+}
+.mobile-menu-links li a div {
+  display: flex;
+  align-items: center;
+}
+
+.menu-links li a div p {
+  margin-left: 5px;
+}
+
+.mobile-menu-links li a div p {
+  margin-left: 10px;
+}
+
+/* banner part */
+
+.banner {
+  padding-left: 50px;
+  padding-right: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: calc(100vh - 70px);
+}
+
+.banner div h2 {
+  font-size: 50px;
+  font-weight: 700;
+
+  background: -webkit-linear-gradient(
+    0deg,
+    #4ca5ff 0%,
+    #828bfb 50%,
+    #b374f8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* New Books */
+
+.recent-add > p {
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+
+  padding-bottom: 40px;
+}
+
+.recent-all-books {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.books-card {
+  margin: 10px;
+  padding: 20px;
+  width: 250px;
+  height: 330px;
+  border: 2px solid #4ca5ff;
+  border-radius: 3px;
+}
+/* book card */
+
+.book-card h3 {
+  font-weight: 600;
+  background: -webkit-linear-gradient(
+    0deg,
+    #2e97ff 0%,
+    #6e78ff 50%,
+    #9e4bf8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  padding-bottom: 20px;
+  border-bottom: 2px dashed lightgray;
+}
+
+.book-card p {
+  font-weight: 100;
+}
+
+.book-card p span {
+  font-weight: 500;
+
+  color: #2e97ff;
+}
+.book-card p .gree {
+  font-weight: 500;
+
+  color: #b573f8;
+}
+
+.single-book-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.edit-button {
+  background-color: #4ca5ff;
+  border-radius: 5px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 30px;
+  line-height: 15px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 5px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.edit-button:hover,
+.edit-button:focus {
+  background-color: #75baff;
+}
+
+.delete-button {
+  background-color: #ea4c89;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 30px;
+  line-height: 15px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 5px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.delete-button:hover,
+.delete-button:focus {
+  background-color: #f082ac;
+}
+
+.height {
+  height: calc(100vh - 70px);
+}
+
+/* .add-banner {
+  background-image: url('./assets/images/bg-pattern.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.button-85 {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: '';
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
