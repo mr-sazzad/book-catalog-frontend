@@ -1,11 +1,24 @@
+import { auth } from '@/Firebase/firebase';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setUser } from '@/redux/users/userSlice';
+import { signOut } from 'firebase/auth';
 import { AiFillHome } from 'react-icons/ai';
-import { BsFillPersonCheckFill } from 'react-icons/bs';
+import { BsFillPersonCheckFill, BsPersonFillSlash } from 'react-icons/bs';
 import { GiBookshelf } from 'react-icons/gi';
 import { SiBookstack } from 'react-icons/si';
 import { TbSquareRoundedPlusFilled } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const { user } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(setUser(null));
+    });
+  };
   return (
     <div className="drawer drawer-end">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -46,12 +59,26 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="login">
-                  <div>
-                    <BsFillPersonCheckFill />
-                    <p>Login</p>
-                  </div>
-                </Link>
+                {!user.email && (
+                  <>
+                    <Link to="login">
+                      <div>
+                        <BsFillPersonCheckFill />
+                        <p>Login</p>
+                      </div>
+                    </Link>
+                  </>
+                )}
+                {user.email && (
+                  <>
+                    <button onClick={handleLogout}>
+                      <div className="flex gap-1 justify-center items-center">
+                        <BsPersonFillSlash />
+                        <p>Logout</p>
+                      </div>
+                    </button>
+                  </>
+                )}
               </li>
             </ul>
           </div>
