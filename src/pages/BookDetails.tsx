@@ -1,4 +1,3 @@
-import Footer from '@/components/Footer';
 import {
   useDeleteSingleBookMutation,
   useGetSingleBookQuery,
@@ -34,7 +33,6 @@ const BookDetails = () => {
           </button>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
