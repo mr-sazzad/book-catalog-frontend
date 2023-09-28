@@ -8,6 +8,7 @@ import { GiBookshelf } from 'react-icons/gi';
 import { SiBookstack } from 'react-icons/si';
 import { TbSquareRoundedPlusFilled } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -15,12 +16,48 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    signOut(auth).then(() => {
-      dispatch(setUser(null));
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: true,
     });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Are you sure?',
+        text: 'You want to Log Out!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Log Out!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          signOut(auth).then(() => {
+            dispatch(setUser(null));
+          });
+          swalWithBootstrapButtons.fire(
+            'Log Out !',
+            'Log Out Successfully !.',
+            'success'
+          );
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'You are Now Safe :)',
+            'error'
+          );
+        }
+      });
   };
   return (
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end z-50">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
@@ -131,12 +168,26 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="add-new">
-              <div>
-                <BsFillPersonCheckFill />
-                <p>Sign up</p>
-              </div>
-            </Link>
+            {!user.email && (
+              <>
+                <Link to="login">
+                  <div>
+                    <BsFillPersonCheckFill />
+                    <p>Login</p>
+                  </div>
+                </Link>
+              </>
+            )}
+            {user.email && (
+              <>
+                <button onClick={handleLogout}>
+                  <div className="flex gap-1 justify-center items-center">
+                    <BsPersonFillSlash />
+                    <p>Logout</p>
+                  </div>
+                </button>
+              </>
+            )}
           </li>
         </ul>
       </div>

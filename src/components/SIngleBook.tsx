@@ -5,6 +5,7 @@ const SIngleBook = ({ book }: BookCardProps) => {
   return (
     <div className="book-card single-book-card">
       <Link to={`book-details/${book._id}`}>
+        <img src={book.Image} alt="book-image" className="h-24 mb-5" />
         <h3>
           <span>{book.Title}</span>
         </h3>

@@ -6,10 +6,9 @@ export interface BookCardProps {
 
 const BookCard = ({ book }: BookCardProps) => {
   return (
-    <div className="book-card">
-      <h3>
-        <span>{book.Title}</span>
-      </h3>
+    <div className="book-card flex flex-col">
+      <img src={book.Image} className="h-36 object-contain " />
+      <p className="font-semibold text-xl">{book.Title}</p>
       <p className="pt-5">
         <span>Author: </span>
         {book.Author}

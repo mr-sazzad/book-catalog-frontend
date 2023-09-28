@@ -1,16 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+// https://book-catalog-backend-sable.vercel.app 🦀
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://book-catalog-backend-sable.vercel.app',
+    baseUrl: 'http://localhost:5000/api/v1/',
   }),
+  tagTypes: ['books', 'comments'],
+
   endpoints: (builder) => ({
     getRecentBooks: builder.query({
       query: () => '/books/recent',
+      providesTags: ['books'],
     }),
 
     getAllBooks: builder.query({
       query: () => '/books',
+      providesTags: ['books'],
     }),
 
     getSingleBook: builder.query({
@@ -23,6 +27,7 @@ export const api = createApi({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['books'],
     }),
 
     updateSingleBook: builder.mutation({
@@ -31,6 +36,7 @@ export const api = createApi({
         method: 'PUT',
         body: data,
       }),
+      invalidatesTags: ['books'],
     }),
 
     deleteSingleBook: builder.mutation({
@@ -38,6 +44,23 @@ export const api = createApi({
         url: `/books/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['books'],
+    }),
+
+    getBookReviews: builder.query({
+      query: (id) => ({
+        url: `/books/${id}/comments`,
+      }),
+      providesTags: ['comments'],
+    }),
+
+    postBookReview: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/books/${id}/comment`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['comments'],
     }),
   }),
 });
@@ -49,4 +72,6 @@ export const {
   usePostABookMutation,
   useUpdateSingleBookMutation,
   useDeleteSingleBookMutation,
+  useGetBookReviewsQuery,
+  usePostBookReviewMutation,
 } = api;

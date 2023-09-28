@@ -7,6 +7,7 @@ export interface IBook {
   Author: string;
   Genre: string;
   PublishedDate: string;
+  Image: string;
 }
 
 const NewBooks = () => {
@@ -14,7 +15,7 @@ const NewBooks = () => {
 
   return (
     <div className="recent-add">
-      <p>📖 Recently Added Books 📖</p>
+      <p>Recently Added Books</p>
       <div className="recent-all-books">
         {data?.data?.map((book: IBook) => (
           <div className="books-card" key={book.Title}>

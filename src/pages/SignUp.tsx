@@ -1,6 +1,7 @@
 import { useAppDispatch } from '@/redux/hooks';
 import { createUser } from '@/redux/users/userSlice';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
 const Signup: React.FC = () => {
@@ -9,6 +10,8 @@ const Signup: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [_passwordMatch, setPasswordMatch] = useState(true);
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -33,12 +36,16 @@ const Signup: React.FC = () => {
     setIsFormValid(
       email !== '' && password !== '' && password === confirmPassword
     );
-  }, [email, password, confirmPassword]);
+  }, [email, password, confirmPassword, checkPasswordMatch]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(createUser({ email: email, password: password }));
+
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
 
     // Reset form fields
     setEmail('');

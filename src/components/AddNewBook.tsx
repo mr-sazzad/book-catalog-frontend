@@ -1,12 +1,14 @@
 import { usePostABookMutation } from '@/redux/api/apiSlice';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 type FormData = {
   title: string;
   author: string;
   genre: string;
   publicationDate: string;
+  image: string;
 };
 
 function AddNewBook() {
@@ -20,6 +22,7 @@ function AddNewBook() {
       Title: data.title,
       Author: data.author,
       Genre: data.genre,
+      Image: data.image,
       PublishedDate: new Date(data.publicationDate).toLocaleDateString(
         'en-US',
         {
@@ -32,6 +35,7 @@ function AddNewBook() {
 
     // send data to the backend
     postABook(formattedData);
+    Swal.fire('Good job!', 'Book Added Successfully !');
     navigate('/');
   };
 
@@ -97,6 +101,22 @@ function AddNewBook() {
           id="publicationDate"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('publicationDate', { required: true })}
+        />
+      </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="image"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          Image Url
+        </label>
+        <input
+          type="text"
+          id="image"
+          className="border border-gray-300 rounded-md p-2 w-full"
+          placeholder="Please Provide a hosted image URL"
+          {...register('image', { required: true })}
         />
       </div>
 

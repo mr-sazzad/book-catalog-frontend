@@ -31,19 +31,15 @@ function EditBook() {
       ),
     };
 
-    // send data to the backend
-    // console.log(id);
     updateBook({ id, formattedData })
       .unwrap()
       .then((fulfilled) => {
         console.log(fulfilled);
-        reset(); // Reset the form fields
+        reset();
         navigate('/books');
       })
 
       .catch((rejected) => console.error(rejected));
-
-    //  how i clear those field after submitting the data
   };
 
   return (
