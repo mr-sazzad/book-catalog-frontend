@@ -13,6 +13,8 @@ export interface IBook {
 const NewBooks = () => {
   const { data } = useGetRecentBooksQuery(undefined);
 
+  console.log(data, 'Home Page');
+
   return (
     <div className="recent-add">
       <p>Recently Added Books</p>

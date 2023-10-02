@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// https://book-catalog-backend-sable.vercel.app 🦀
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/v1/',
+    baseUrl: 'https://book-catalog-backend-sable.vercel.app/api/v1/',
   }),
   tagTypes: ['books', 'comments'],
 
