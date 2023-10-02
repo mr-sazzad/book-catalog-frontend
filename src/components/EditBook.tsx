@@ -116,7 +116,7 @@ function EditBook() {
           Image URL
         </label>
         <input
-          type="date"
+          type="text"
           id="image"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('image', { required: true })}
