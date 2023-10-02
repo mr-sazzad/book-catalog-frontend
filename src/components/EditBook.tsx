@@ -119,6 +119,7 @@ function EditBook() {
           type="text"
           id="image"
           className="border border-gray-300 rounded-md p-2 w-full"
+          placeholder="Hosted Link Please"
           {...register('image', { required: true })}
         />
       </div>
