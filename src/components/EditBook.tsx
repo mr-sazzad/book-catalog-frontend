@@ -7,6 +7,7 @@ type FormData = {
   author: string;
   genre: string;
   publicationDate: string;
+  image: string;
 };
 
 function EditBook() {
@@ -29,6 +30,7 @@ function EditBook() {
           year: 'numeric',
         }
       ),
+      image: data.image,
     };
 
     updateBook({ id, formattedData })
@@ -104,6 +106,20 @@ function EditBook() {
           id="publicationDate"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('publicationDate', { required: true })}
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="image"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          Image URL
+        </label>
+        <input
+          type="date"
+          id="image"
+          className="border border-gray-300 rounded-md p-2 w-full"
+          {...register('image', { required: true })}
         />
       </div>
 
