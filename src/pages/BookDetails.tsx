@@ -24,8 +24,6 @@ const BookDetails = () => {
 
   const { data } = useGetSingleBookQuery(id);
 
-  console.log(data, 'Book');
-
   const [deleteBook] = useDeleteSingleBookMutation();
 
   const handleDelete = () => {

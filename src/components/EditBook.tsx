@@ -1,4 +1,7 @@
-import { useUpdateSingleBookMutation } from '@/redux/api/apiSlice';
+import {
+  useGetSingleBookQuery,
+  useUpdateSingleBookMutation,
+} from '@/redux/api/apiSlice';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -16,6 +19,10 @@ function EditBook() {
 
   const { register, handleSubmit, reset } = useForm<FormData>();
   const [updateBook, _options] = useUpdateSingleBookMutation();
+
+  const { data } = useGetSingleBookQuery(id);
+
+  console.log(data, 'Single Book');
 
   const onSubmit = (data: FormData) => {
     const formattedData = {
