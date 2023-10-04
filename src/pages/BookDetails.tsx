@@ -4,13 +4,17 @@ import {
   useGetSingleBookQuery,
   usePostBookReviewMutation,
 } from '@/redux/api/apiSlice';
+import { useAppSelector } from '@/redux/hooks';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { GoPerson } from 'react-icons/go';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const { user } = useAppSelector((state) => state.user);
 
   const { data: comments } = useGetBookReviewsQuery(id);
 
@@ -25,12 +29,29 @@ const BookDetails = () => {
   const [deleteBook] = useDeleteSingleBookMutation();
 
   const handleDelete = () => {
-    deleteBook(id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't to delete this book!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteBook(id);
+        Swal.fire('Deleted!', 'Book has been deleted.', 'success');
+      }
+    });
     navigate('/books');
   };
 
   const handleReview: SubmitHandler<FieldValues> = (data) => {
-    postBookReview({ id, data });
+    if (!user.email) {
+      navigate('/login');
+    } else if (user.email) {
+      postBookReview({ id, data });
+    }
     reset();
   };
 
