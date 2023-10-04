@@ -6,6 +6,7 @@ import {
 } from '@/redux/api/apiSlice';
 import { useAppSelector } from '@/redux/hooks';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { AiOutlineComment } from 'react-icons/ai';
 import { GoPerson } from 'react-icons/go';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -38,10 +39,10 @@ const BookDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteBook(id);
+        navigate('/books');
         Swal.fire('Deleted!', 'Book has been deleted.', 'success');
       }
     });
-    navigate('/books');
   };
 
   const handleReview: SubmitHandler<FieldValues> = (data) => {
@@ -52,6 +53,13 @@ const BookDetails = () => {
     }
     reset();
   };
+
+  const time = new Date();
+  const date = time.getDate();
+  const month = time.getMonth();
+  const year = time.getFullYear();
+
+  const fullDate = `${date}/${month}/${year}`;
 
   return (
     <div className="mx-[50px] flex flex-col mt-10">
@@ -106,25 +114,63 @@ const BookDetails = () => {
           </button>
         </form>
 
-        <div className="mb-10">
-          <span className="border-2 py-2 px-5 border-indigo-300 rounded-full text-indigo-500 font-medium">
-            Reviews Section
+        <div className="mb-10 flex flex-col gap-5">
+          <span className="inline-flex items-center gap-3 border-2 py-1 px-5 border-indigo-300 rounded-full text-indigo-500 font-medium w-36">
+            <AiOutlineComment className="text-xl" /> Reviews
           </span>
-          <div className="flex flex-col gap-3 mt-5">
-            {Array.isArray(comments?.data) ? (
-              comments?.data.map((comment: any) => (
-                <div key={comment._id}>
-                  <div className="flex items-center flex-row gap-3">
-                    <div className="border p-1 text-lg rounded-full border-indigo-500">
-                      <GoPerson />
+          <div className="">
+            <div className="flex flex-row gap-3 flex-wrap">
+              {Array.isArray(comments?.data) &&
+                comments?.data.map((comment: any) => (
+                  <div key={comment._id}>
+                    <div
+                      className="
+                      flex
+                      flex-col
+                      gap-3
+                      bg-indigo-50
+                      py-3
+                      px-5
+                      rounded-md
+                      border
+                      border-indigo-500
+                      w-96
+                   "
+                    >
+                      <div
+                        className="
+                        inline-flex
+                        justify-between
+                        items-center
+                        flex-row
+                        gap-3
+                    "
+                      >
+                        <div>
+                          <div className="flex flex-row items-center gap-2">
+                            <div
+                              className="
+                          border
+                          p-1
+                          text-md
+                          rounded-full
+                          border-indigo-500"
+                            >
+                              <GoPerson />
+                            </div>
+                            <div className="text-sm flex flex-col">
+                              <div>@Coming Soon</div>
+                              user email
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-sm">Date: {fullDate}</span>
+                      </div>
+                      <p className="ml-9">{comment.comment}</p>
                     </div>
-                    <p>{comment.comment}</p>
                   </div>
-                </div>
-              ))
-            ) : (
-              <p>No comments available.</p>
-            )}
+                ))}
+            </div>
           </div>
         </div>
       </div>

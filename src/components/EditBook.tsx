@@ -4,6 +4,7 @@ import {
 } from '@/redux/api/apiSlice';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
+import Loading from './Loading';
 
 type FormData = {
   title: string;
@@ -20,7 +21,11 @@ function EditBook() {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const [updateBook, _options] = useUpdateSingleBookMutation();
 
-  const { data } = useGetSingleBookQuery(id);
+  const { data, isLoading } = useGetSingleBookQuery(id);
+
+  if (isLoading) {
+    <Loading />;
+  }
 
   const fetchedBook = data?.data;
 
@@ -68,7 +73,7 @@ function EditBook() {
           id="title"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('title', { required: true })}
-          defaultValue={fetchedBook.Title}
+          defaultValue={fetchedBook?.Title}
         />
       </div>
 
@@ -84,7 +89,7 @@ function EditBook() {
           id="author"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('author', { required: true })}
-          defaultValue={fetchedBook.Author}
+          defaultValue={fetchedBook?.Author}
         />
       </div>
 
@@ -100,7 +105,7 @@ function EditBook() {
           id="genre"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('genre', { required: true })}
-          defaultValue={fetchedBook.Genre}
+          defaultValue={fetchedBook?.Genre}
         />
       </div>
 
@@ -116,7 +121,7 @@ function EditBook() {
           id="publicationDate"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('publicationDate', { required: true })}
-          defaultValue={fetchedBook.PublishedDate}
+          defaultValue={fetchedBook?.PublishedDate}
         />
       </div>
       <div className="mb-4">
@@ -132,7 +137,7 @@ function EditBook() {
           className="border border-gray-300 rounded-md p-2 w-full"
           placeholder="Hosted Link Please"
           {...register('image', { required: true })}
-          defaultValue={fetchedBook.Image}
+          defaultValue={fetchedBook?.Image}
         />
       </div>
 
