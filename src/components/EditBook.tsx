@@ -22,7 +22,7 @@ function EditBook() {
 
   const { data } = useGetSingleBookQuery(id);
 
-  console.log(data, 'Single Book');
+  const fetchedBook = data?.data;
 
   const onSubmit = (data: FormData) => {
     const formattedData = {
@@ -68,6 +68,7 @@ function EditBook() {
           id="title"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('title', { required: true })}
+          defaultValue={fetchedBook.Title}
         />
       </div>
 
@@ -83,6 +84,7 @@ function EditBook() {
           id="author"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('author', { required: true })}
+          defaultValue={fetchedBook.Author}
         />
       </div>
 
@@ -98,6 +100,7 @@ function EditBook() {
           id="genre"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('genre', { required: true })}
+          defaultValue={fetchedBook.Genre}
         />
       </div>
 
@@ -113,6 +116,7 @@ function EditBook() {
           id="publicationDate"
           className="border border-gray-300 rounded-md p-2 w-full"
           {...register('publicationDate', { required: true })}
+          defaultValue={fetchedBook.PublishedDate}
         />
       </div>
       <div className="mb-4">
@@ -128,6 +132,7 @@ function EditBook() {
           className="border border-gray-300 rounded-md p-2 w-full"
           placeholder="Hosted Link Please"
           {...register('image', { required: true })}
+          defaultValue={fetchedBook.Image}
         />
       </div>
 
