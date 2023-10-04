@@ -67,7 +67,7 @@ const BookDetails = () => {
           <p className="text-lg mb-3">Date: {data?.data?.PublishedDate}</p>
           <div className="card-actions justify-between">
             <Link
-              to={`/books/${id}`}
+              to={user.email ? `/books/${id}` : `/login`}
               className="btn bg-indigo-400 text-white hover:text-black transition"
             >
               Edit Book
