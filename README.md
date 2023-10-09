@@ -1,3 +1,3 @@
 # book-catalog-frontend
 
-### frontend application link :-  https://chic-vacherin-d7ad7f.netlify.app/
+### frontend application link :-  https://elegant-valkyrie-2f64ea.netlify.app/
