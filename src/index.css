@@ -251,13 +251,6 @@ body {
   height: calc(100vh - 70px);
 }
 
-/* .add-banner {
-  background-image: url('./assets/images/bg-pattern.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
 .button-85 {
   padding: 0.6em 2em;
   border: none;
@@ -323,4 +316,24 @@ body {
   left: 0;
   top: 0;
   border-radius: 10px;
+}
+
+.my-masonry-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -10px;
+  width: auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  justify-content: center;
+}
+.my-masonry-grid_column {
+  padding-left: 10px;
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > div {
+  margin-bottom: 10px;
 }

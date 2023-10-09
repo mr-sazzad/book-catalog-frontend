@@ -22,6 +22,8 @@ const LoginPage: React.FC = () => {
   const onSubmit = (data: LoginFormInputs) => {
     dispatch(loginUser({ email: data.email, password: data.password }));
 
+    console.log(dispatch);
+
     setTimeout(() => {
       navigate('/');
     }, 2000);
